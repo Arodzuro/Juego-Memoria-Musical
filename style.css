@@ -1,0 +1,175 @@
+body {
+    background-color: #121212;
+    color: #E0E0E0;
+    font-family: 'Arial', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+#game-container {
+    text-align: center;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #1F1F1F;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5);
+
+}
+
+h2 {
+    color: #7300ff;
+    font-size: 30px;
+}
+
+button {
+    background-color: #4a00a5;
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+button:hover {
+    background-color: #9E66F2;
+}
+
+#keyboardContainer {
+    display: flex;
+    justify-content: center;
+    margin-top: 5px;
+}
+
+.key {
+    width: 40px;
+    height: 150px;
+    margin: 2px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    position: relative;
+    text-align: center;
+    border: 1px solid #000;
+    line-height: 150px;
+    font-weight: bold;
+}
+
+.white {
+    background-color: white;
+    color: gray;
+    text-align: center;
+}
+
+.black {
+    background-color: black;
+    width: 30px;
+    height: 90px;
+    position: relative;
+    z-index: 1;
+    margin-left: -15px;
+    margin-right: -15px;
+}
+.key.active {
+    background-color:  rgb(153, 0, 255);
+}
+
+#message {
+    margin-top: 10px;
+    font-size: 18px;
+    color: #BB86FC;
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+    #keyboard {
+        max-width: 100%;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .white {
+        width: 2.8rem;
+        height: 8rem;
+    }
+
+    .black {
+        width: 1.6rem;
+        height: 6rem;
+        margin-left: -0.8rem;
+    }
+
+    button {
+        font-size: 1rem;
+        padding: 8px 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    #gameContainer {
+        padding: 10px;
+    }
+
+    #keyboard {
+        max-width: 100%;
+        max-height: 35vh; /* Limitar la altura en smartphones */
+    }
+
+    .white {
+        width: 2.2rem;
+        height: 6rem;
+    }
+
+    .black {
+        width: 1.4rem;
+        height: 4rem;
+        margin-left: -0.7rem;
+    }
+
+    button {
+        font-size: 0.9rem;
+        padding: 6px 12px;
+    }
+}
+
+/* Pantallas pequeñas en modo horizontal */
+@media (max-width: 480px) and (orientation: landscape) {
+    #piano {
+        flex-wrap: nowrap; /* Evitar que las teclas se dividan en dos filas */
+        max-width: 100%;
+        overflow-x: auto; /* Permitir desplazamiento horizontal si es necesario */
+    }
+
+    .key.white {
+        width: 2rem;
+        height: 5rem;
+    }
+
+    .key.black {
+        width: 1.2rem;
+        height: 3.5rem;
+        margin-left: -0.6rem;
+    }
+}
+
+#rotateMessage {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    z-index: 1000;
+    font-size: 1.5rem;
+    padding: 20px;
+    box-sizing: border-box;
+    display: none; /* Oculto por defecto */
+}

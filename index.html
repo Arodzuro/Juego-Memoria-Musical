@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Juego Memoria Musical</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Incluye Tone.js y ToneUI -->
+    <script src="https://unpkg.com/tone/build/Tone.js"></script>
+</head>
+<body>
+    <div id="rotateMessage">
+        <p>Por favor, voltea tu dispositivo a modo horizontal para una mejor experiencia de juego.</p>
+    </div>    
+    <div id="game-container">
+        <h2>Juego Memoria Musical</h2>
+        <button id="startButton">Empezar</button>
+        <div id="message"></div>
+        <div id="keyboard"></div>
+    <div id="keyboardContainer">
+        <!-- Teclas del teclado -->
+        <div class="key white" data-note="C4">C</div>
+        <div class="key black" data-note="C#4"></div>
+        <div class="key white" data-note="D4">D</div>
+        <div class="key black" data-note="D#4"></div>
+        <div class="key white" data-note="E4">E</div>
+        <div class="key white" data-note="F4">F</div>
+        <div class="key black" data-note="F#4"></div>
+        <div class="key white" data-note="G4">G</div>
+        <div class="key black" data-note="G#4"></div>
+        <div class="key white" data-note="A4">A</div>
+        <div class="key black" data-note="A#4"></div>
+        <div class="key white" data-note="B4">B</div>
+        <div class="key white" data-note="C5">C</div>
+        <div class="key black" data-note="C#5"></div>
+        <div class="key white" data-note="D5">D</div>
+        <div class="key black" data-note="D#5"></div>
+        <div class="key white" data-note="E5">E</div>
+        <div class="key white" data-note="F5">F</div>
+        <div class="key black" data-note="F#5"></div>
+        <div class="key white" data-note="G5">G</div>
+        <div class="key black" data-note="G#5"></div>
+        <div class="key white" data-note="A5">A</div>
+        <div class="key black" data-note="A#5"></div>
+        <div class="key white" data-note="B5">B</div>
+        <div class="key white" data-note="C6">C</div>
+    </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
+
+
