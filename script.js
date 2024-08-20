@@ -1,8 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Configuración del sintetizador
-    const synth = new Tone.Synth().toDestination();
-
-    // Secuencia de notas (patrón) que el juego genera
+    // Configuración del AMSynth para un sonido más natural
+    const synth = new Tone.AMSynth().toDestination();
+        // Secuencia de notas (patrón) que el juego genera
     let patternSequence = [];
     // Secuencia del jugador
     let playerSequence = [];
