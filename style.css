@@ -5,10 +5,8 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    /*min-height: 100vh;
+    height: 100vh; /* Asegura altura total de pantalla */
     margin: 0;
-    box-sizing: border-box;
-    width: 100%;*/
 }
 
 #game-container {
@@ -16,7 +14,7 @@ body {
     padding: 20px;
     border-radius: 15px;
     background-color: #1F1F1F;
-    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5);
+    box-shadow: 0px 0px 40px #7300ff;
 
 }
 
@@ -64,38 +62,40 @@ button:hover {
 #keyboardContainer {
     display: flex;
     justify-content: center;
-    margin-top: 5px;
-}
-
-.key {
-    width: 40px;
-    height: 150px;
-    margin: 2px;
-    border-radius: 5px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-    cursor: pointer;
+    flex-wrap: nowrap;
     position: relative;
-    text-align: center;
-    border: 1px solid #000;
-    line-height: 150px;
-    font-weight: bold;
 }
 
-.white {
-    background-color: white;
-    color: gray;
-    text-align: center;
+.key-group {
+    position: relative;
 }
 
-.black {
+.key.black {
+    position: absolute;
+    top: 0;
+    left: 24px; /* ajusta según ancho de la tecla blanca */
+    z-index: 2;
     background-color: black;
     width: 30px;
     height: 90px;
-    position: relative;
-    z-index: 1;
-    margin-left: -15px;
-    margin-right: -15px;
+    border-radius: 0 0 3px 3px;
 }
+
+.key.white {
+    background-color: white;
+    color: gray;
+    width: 40px;
+    height: 150px;
+    border: 1px solid #000;
+    z-index: 1;
+    text-align: center;
+    line-height: 150px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 12px;
+    padding-top: 25px;
+    border-radius: 5px 5px 5px 5px;
+}
+
 .key.active {
     background-color:  rgb(153, 0, 255);
 }
@@ -108,31 +108,21 @@ button:hover {
 
 /* Responsividad */
 @media (max-width: 768px) {
-    #keyboard {
-        max-width: 100%;
-        flex-direction: column;
-        align-items: center;
+    .key.white {
+        width: 30px;
+        height: 120px;
     }
 
-    .white {
-        width: 2.8rem;
-        height: 8rem;
-    }
-
-    .black {
-        width: 1.6rem;
-        height: 6rem;
-        margin-left: -0.8rem;
-    }
-
-    button {
-        font-size: 1rem;
-        padding: 8px 16px;
+    .key.black {
+        width: 20px;
+        height: 70px;
+        left: 18px; /* ajusta proporcionalmente */
     }
 }
 
+
 @media (max-width: 480px) {
-    #gameContainer {
+    #game-container {
         padding: 10px;
     }
 
@@ -178,21 +168,3 @@ button:hover {
     }
 }
 
-#rotateMessage {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.9);
-    color: #fff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    z-index: 1000;
-    font-size: 1.5rem;
-    padding: 20px;
-    box-sizing: border-box;
-    display: none; /* Oculto por defecto */
-}

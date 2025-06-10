@@ -9,9 +9,6 @@
     <script src="https://unpkg.com/tone/build/Tone.js"></script>
 </head>
 <body>
-    <div id="rotateMessage">
-        <p>Por favor, voltea tu dispositivo a modo horizontal para una mejor experiencia de juego.</p>
-    </div>    
     <div id="game-container">
         <h1>Juego Memoria Musical</h1>
         <div id="intro" class="intro">
@@ -24,33 +21,63 @@
         <div id="message"></div>
         <div id="keyboard"></div>
     <div id="keyboardContainer">
-        <!-- Teclas del teclado -->
-        <div class="key white" data-note="C4">C</div>
-        <div class="key black" data-note="C#4"></div>
-        <div class="key white" data-note="D4">D</div>
-        <div class="key black" data-note="D#4"></div>
-        <div class="key white" data-note="E4">E</div>
-        <div class="key white" data-note="F4">F</div>
-        <div class="key black" data-note="F#4"></div>
-        <div class="key white" data-note="G4">G</div>
-        <div class="key black" data-note="G#4"></div>
-        <div class="key white" data-note="A4">A</div>
-        <div class="key black" data-note="A#4"></div>
-        <div class="key white" data-note="B4">B</div>
-        <div class="key white" data-note="C5">C</div>
-        <div class="key black" data-note="C#5"></div>
-        <div class="key white" data-note="D5">D</div>
-        <div class="key black" data-note="D#5"></div>
-        <div class="key white" data-note="E5">E</div>
-        <div class="key white" data-note="F5">F</div>
-        <div class="key black" data-note="F#5"></div>
-        <div class="key white" data-note="G5">G</div>
-        <div class="key black" data-note="G#5"></div>
-        <div class="key white" data-note="A5">A</div>
-        <div class="key black" data-note="A#5"></div>
-        <div class="key white" data-note="B5">B</div>
-        <div class="key white" data-note="C6">C</div>
-    </div>
+  <div class="key-group">
+    <div class="key white" data-note="C4">C</div>
+    <div class="key black" data-note="C#4"></div>
+  </div>
+  <div class="key-group">
+    <div class="key white" data-note="D4">D</div>
+    <div class="key black" data-note="D#4"></div>
+  </div>
+  <div class="key-group">
+    <div class="key white" data-note="E4">E</div>
+  </div>
+  <div class="key-group">
+    <div class="key white" data-note="F4">F</div>
+    <div class="key black" data-note="F#4"></div>
+  </div>
+  <div class="key-group">
+    <div class="key white" data-note="G4">G</div>
+    <div class="key black" data-note="G#4"></div>
+  </div>
+  <div class="key-group">
+    <div class="key white" data-note="A4">A</div>
+    <div class="key black" data-note="A#4"></div>
+  </div>
+  <div class="key-group">
+    <div class="key white" data-note="B4">B</div>
+  </div>
+  <div class="key-group">
+    <div class="key white" data-note="C5">C</div>
+    <div class="key black" data-note="C#5"></div>
+  </div>
+  <div class="key-group">
+    <div class="key white" data-note="D5">D</div>
+    <div class="key black" data-note="D#5"></div>
+  </div>
+  <div class="key-group">
+    <div class="key white" data-note="E5">E</div>
+  </div>
+  <div class="key-group">
+    <div class="key white" data-note="F5">F</div>
+    <div class="key black" data-note="F#5"></div>
+  </div>
+  <div class="key-group">
+    <div class="key white" data-note="G5">G</div>
+    <div class="key black" data-note="G#5"></div>
+  </div>
+  <div class="key-group">
+    <div class="key white" data-note="A5">A</div>
+    <div class="key black" data-note="A#5"></div>
+  </div>
+  <div class="key-group">
+    <div class="key white" data-note="B5">B</div>
+  </div>
+  <div class="key-group">
+    <div class="key white" data-note="C6">C</div>
+  </div>
+</div>
+
     </div>
     <script src="script.js"></script>
 </body>

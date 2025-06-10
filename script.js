@@ -1,14 +1,22 @@
 document.addEventListener('DOMContentLoaded', () => {
     // Configuración del AMSynth para un sonido más natural
-    const synth = new Tone.AMSynth().toDestination();
-        // Secuencia de notas (patrón) que el juego genera
+    let synth = new Tone.Synth({
+        oscillator: {
+            type: "sine"
+        },
+        envelope: {
+            attack: 0.05,
+            decay: 0.1,
+            sustain: 0.4,
+            release: 0.8
+        }
+    }).toDestination();
+
     let patternSequence = [];
-    // Secuencia del jugador
     let playerSequence = [];
     let currentLevel = 0;
     let isPlayingPattern = false;
 
-    // Generar una nueva nota aleatoria
     function generateNote() {
         const notes = [
             "C4", "C#4", "D4", "D#4", "E4", "F4", "F#4", "G4", "G#4", "A4", "A#4", "B4",
@@ -18,7 +26,6 @@ document.addEventListener('DOMContentLoaded', () => {
         return notes[Math.floor(Math.random() * notes.length)];
     }
 
-    // Reproducir secuencia del patrón
     function playPatternSequence() {
         isPlayingPattern = true;
         let time = 0;
@@ -29,21 +36,20 @@ document.addEventListener('DOMContentLoaded', () => {
                     isPlayingPattern = false;
                 }
             }, time);
-            time += 600; // Ajustar el tiempo entre las notas
+            time += 600;
         });
     }
 
-    // Reproducir una nota con la iluminación de la tecla
     function playNoteWithHighlight(note) {
         const key = document.querySelector(`[data-note="${note}"]`);
+        if (!key) return;
         key.classList.add('active');
         synth.triggerAttackRelease(note, '8n');
         setTimeout(() => {
             key.classList.remove('active');
-        }, 500); // Duración de la iluminación
+        }, 500);
     }
 
-    // Verificar la secuencia del jugador
     function checkPlayerSequence() {
         const currentStep = playerSequence.length - 1;
         if (playerSequence[currentStep] !== patternSequence[currentStep]) {
@@ -59,14 +65,12 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Comenzar el siguiente nivel
     function nextLevel() {
         playerSequence = [];
         patternSequence.push(generateNote());
         playPatternSequence();
     }
 
-    // Reiniciar el juego
     function resetGame(showMessage = false) {
         currentLevel = 0;
         patternSequence = [];
@@ -77,44 +81,74 @@ document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('message').textContent = '';
         }
     }
-/*prueba rotación*/
-    function checkOrientation() {
-        if (window.innerHeight > window.innerWidth) {
-            // Modo vertical
-            document.getElementById('rotateMessage').style.display = 'flex';
-        } else {
-            // Modo horizontal
-            document.getElementById('rotateMessage').style.display = 'none';
-        }
-    }
-    
-    // Ejecutar la función al cargar la página
-    window.addEventListener('load', checkOrientation);
-    
-    // Detectar cambios en la orientación
-    window.addEventListener('resize', checkOrientation);
-/*prueba rotación*/    
 
-    // Comenzar el juego
     document.getElementById('startButton').addEventListener('click', () => {
         resetGame();
         nextLevel();
     });
 
-    // Evento para cuando el jugador toca una nota
     const keys = document.querySelectorAll('.key');
     keys.forEach(key => {
-        key.addEventListener('mousedown', () => {
-            if (isPlayingPattern) return; // Prevenir que el jugador toque durante la reproducción del patrón
+        const note = key.getAttribute('data-note');
 
-            const note = key.getAttribute('data-note');
+        const handleNotePress = () => {
+            if (isPlayingPattern) return;
             synth.triggerAttackRelease(note, '8n');
             key.classList.add('active');
             playerSequence.push(note);
             checkPlayerSequence();
-        });
-        key.addEventListener('mouseup', () => {
+        };
+
+        const removeActive = () => {
             key.classList.remove('active');
-        });
+        };
+
+        // Ratón
+        key.addEventListener('mousedown', handleNotePress);
+        key.addEventListener('mouseup', removeActive);
+        key.addEventListener('mouseleave', removeActive);
+
+        // Táctil
+        key.addEventListener('touchstart', e => {
+            e.preventDefault();
+            handleNotePress();
+        }, { passive: false });
+
+        key.addEventListener('touchend', removeActive);
+    });
+
+    // === NUEVO: Mapeo de teclado físico ===
+    const keyMap = {
+        'a': 'C4',
+        'w': 'C#4',
+        's': 'D4',
+        'e': 'D#4',
+        'd': 'E4',
+        'f': 'F4',
+        't': 'F#4',
+        'g': 'G4',
+        'y': 'G#4',
+        'h': 'A4',
+        'u': 'A#4',
+        'j': 'B4',
+        'k': 'C5'
+    };
+
+    document.addEventListener('keydown', (event) => {
+        const key = event.key.toLowerCase();
+        const note = keyMap[key];
+
+        if (note && !isPlayingPattern) {
+            const keyElement = document.querySelector(`.key[data-note="${note}"]`);
+            if (keyElement) {
+                keyElement.classList.add('active');
+                synth.triggerAttackRelease(note, '8n');
+                playerSequence.push(note);
+                checkPlayerSequence();
+                setTimeout(() => {
+                    keyElement.classList.remove('active');
+                }, 150);
+            }
+        }
     });
 });
