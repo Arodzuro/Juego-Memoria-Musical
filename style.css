@@ -1,170 +1,343 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 body {
-    background-color: #121212;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
     color: #E0E0E0;
     font-family: 'Arial', sans-serif;
+    min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh; /* Asegura altura total de pantalla */
-    margin: 0;
+    padding: 10px;
 }
 
 #game-container {
     text-align: center;
     padding: 20px;
     border-radius: 15px;
-    background-color: #1F1F1F;
-    box-shadow: 0px 0px 40px #7300ff;
-
+    background-color: rgba(31, 31, 31, 0.95);
+    box-shadow: 0 0 40px rgba(115, 0, 255, 0.5);
+    max-width: 100%;
+    width: 100%;
+    max-width: 900px;
 }
 
 h1 {
     color: #7300ff;
-    font-size: 30px;
+    font-size: clamp(20px, 7vw, 32px);
+    margin-bottom: 12px;
 }
 
-/*Introducción*/
 .intro {
     background: #333333;
     color: #e0e0e0;
-    padding: 15px;
+    padding: 12px;
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-    margin-bottom: 20px;
-    text-align:center;
-    font-size: 0.8em;
+    margin-bottom: 15px;
+    font-size: clamp(12px, 2.5vw, 15px);
 }
 
 .intro h2 {
-    font-size: 1.5em;
-    margin-bottom: 10px;
+    font-size: 1.2em;
+    margin-bottom: 8px;
+    color: #7300ff;
 }
 
 .intro p {
-    font-size: 1em;
+    margin: 5px 0;
+    line-height: 1.4;
+}
+
+.stats {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 12px;
+    flex-wrap: wrap;
+}
+
+.stat-item {
+    background: rgba(115, 0, 255, 0.2);
+    padding: 8px 18px;
+    border-radius: 8px;
+    border: 2px solid #7300ff;
+}
+
+.stat-label {
+    font-size: 11px;
+    color: #BB86FC;
+}
+
+.stat-value {
+    font-size: 22px;
+    font-weight: bold;
+    color: #fff;
 }
 
 button {
     background-color: #4a00a5;
     color: #ffffff;
     border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
+    padding: 14px 35px;
+    border-radius: 8px;
     cursor: pointer;
-    font-size: 16px;
-    margin-bottom: 20px;
+    font-size: clamp(16px, 3vw, 20px);
+    margin-bottom: 15px;
+    transition: all 0.3s ease;
+    font-weight: bold;
 }
 
-button:hover {
-    background-color: #9E66F2;
+button:hover:not(:disabled) {
+    background-color: #6a00d5;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(115, 0, 255, 0.4);
+}
+
+button:disabled {
+    background-color: #666;
+    cursor: not-allowed;
+    opacity: 0.6;
 }
 
 #keyboardContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+    margin: 0 auto;
+    padding: 10px 5px 20px 5px;
+    max-width: 100%;
+}
+
+.octave {
     display: flex;
     justify-content: center;
     flex-wrap: nowrap;
     position: relative;
 }
 
+.octave-label {
+    font-size: 12px;
+    color: #BB86FC;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
 .key-group {
     position: relative;
+    flex-shrink: 0;
+}
+
+.key {
+    cursor: pointer;
+    user-select: none;
+    transition: all 0.15s ease;
+    touch-action: manipulation;
+}
+
+.key.white {
+    background: linear-gradient(180deg, #ffffff 0%, #f0f0f0 100%);
+    color: #666;
+    width: 60px;
+    height: 180px;
+    border: 2px solid #333;
+    border-radius: 0 0 6px 6px;
+    z-index: 1;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding-bottom: 12px;
+    font-size: 14px;
+    font-weight: bold;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.2);
 }
 
 .key.black {
     position: absolute;
     top: 0;
-    left: 24px; /* ajusta según ancho de la tecla blanca */
+    left: 40px;
     z-index: 2;
-    background-color: black;
-    width: 30px;
-    height: 90px;
-    border-radius: 0 0 3px 3px;
-}
-
-.key.white {
-    background-color: white;
-    color: gray;
+    background: linear-gradient(180deg, #2a2a2a 0%, #000000 100%);
     width: 40px;
-    height: 150px;
+    height: 115px;
+    border-radius: 0 0 5px 5px;
     border: 1px solid #000;
-    z-index: 1;
-    text-align: center;
-    line-height: 150px;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    font-size: 12px;
-    padding-top: 25px;
-    border-radius: 5px 5px 5px 5px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.5);
 }
 
 .key.active {
-    background-color:  rgb(153, 0, 255);
+    background: linear-gradient(180deg, #9900ff 0%, #6600cc 100%) !important;
+    transform: scale(0.97);
+    box-shadow: 0 2px 8px rgba(153, 0, 255, 0.9) !important;
+}
+
+.key.white.active {
+    color: white;
 }
 
 #message {
-    margin-top: 10px;
-    font-size: 18px;
+    margin-top: 12px;
+    font-size: clamp(15px, 3.5vw, 19px);
     color: #BB86FC;
+    min-height: 28px;
+    font-weight: bold;
 }
 
-/* Responsividad */
+.message-success {
+    color: #00ff88 !important;
+}
+
+.message-error {
+    color: #ff4444 !important;
+}
+
+/* Móviles - Teclas GRANDES */
 @media (max-width: 768px) {
+    #game-container {
+        padding: 12px 8px;
+    }
+
+    .octave {
+        gap: 0;
+    }
+
     .key.white {
-        width: 30px;
-        height: 120px;
+        width: 55px;
+        height: 160px;
+        font-size: 13px;
+        padding-bottom: 10px;
     }
 
     .key.black {
-        width: 20px;
-        height: 70px;
-        left: 18px; /* ajusta proporcionalmente */
+        width: 36px;
+        height: 105px;
+        left: 37px;
+    }
+
+    h1 {
+        margin-bottom: 10px;
+    }
+
+    .stats {
+        gap: 12px;
+        margin-bottom: 10px;
     }
 }
 
-
 @media (max-width: 480px) {
+    body {
+        padding: 5px;
+    }
+
     #game-container {
+        padding: 10px 5px;
+    }
+
+    .intro {
         padding: 10px;
+        font-size: 12px;
     }
 
-    #keyboard {
-        max-width: 100%;
-        max-height: 35vh; /* Limitar la altura en smartphones */
+    .intro h2 {
+        font-size: 1.1em;
     }
 
-    .white {
-        width: 2.2rem;
-        height: 6rem;
+    #keyboardContainer {
+        gap: 15px;
     }
 
-    .black {
-        width: 1.4rem;
-        height: 4rem;
-        margin-left: -0.7rem;
+    /* Teclas MUY GRANDES para móviles pequeños */
+    .key.white {
+        width: 52px;
+        height: 150px;
+        font-size: 12px;
+        padding-bottom: 10px;
+    }
+
+    .key.black {
+        width: 34px;
+        height: 98px;
+        left: 35px;
     }
 
     button {
-        font-size: 0.9rem;
-        padding: 6px 12px;
+        padding: 12px 28px;
+        margin-bottom: 12px;
+    }
+
+    .stat-item {
+        padding: 6px 14px;
+    }
+
+    .stat-value {
+        font-size: 20px;
+    }
+
+    #keyboardContainer {
+        padding: 8px 3px 15px 3px;
+        gap: 12px;
     }
 }
 
-/* Pantallas pequeñas en modo horizontal */
-@media (max-width: 480px) and (orientation: landscape) {
-    #piano {
-        flex-wrap: nowrap; /* Evitar que las teclas se dividan en dos filas */
-        max-width: 100%;
-        overflow-x: auto; /* Permitir desplazamiento horizontal si es necesario */
+/* Landscape en móviles */
+@media (max-height: 600px) and (orientation: landscape) {
+    #game-container {
+        max-height: 95vh;
+        overflow-y: auto;
+    }
+
+    .intro {
+        padding: 8px;
+        margin-bottom: 8px;
+    }
+
+    .intro p {
+        margin: 3px 0;
+    }
+
+    h1 {
+        font-size: 20px;
+        margin-bottom: 8px;
+    }
+
+    .stats {
+        margin-bottom: 8px;
+    }
+
+    button {
+        padding: 10px 25px;
+        margin-bottom: 8px;
+    }
+
+    #keyboardContainer {
+        gap: 10px;
     }
 
     .key.white {
-        width: 2rem;
-        height: 5rem;
+        height: 110px;
     }
 
     .key.black {
-        width: 1.2rem;
-        height: 3.5rem;
-        margin-left: -0.6rem;
+        height: 72px;
     }
 }
 
+/* Para pantallas muy pequeñas */
+@media (max-width: 360px) {
+    .key.white {
+        width: 48px;
+        height: 140px;
+        font-size: 11px;
+    }
+
+    .key.black {
+        width: 31px;
+        height: 92px;
+        left: 32px;
+    }
+}
