@@ -5,82 +5,102 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Juego Memoria Musical</title>
     <link rel="stylesheet" href="style.css">
-    <!-- Incluye Tone.js y ToneUI -->
-    <script src="https://unpkg.com/tone/build/Tone.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js"></script>
 </head>
 <body>
     <div id="game-container">
-        <h1>Juego Memoria Musical</h1>
-        <div id="intro" class="intro">
+        <h1>Memoria Musical</h1>
+        
+        <div class="intro" id="intro">
             <h2>¿Cómo Funciona?</h2>
             <p>El teclado te muestra notas al azar.</p> 
-            <p>Tu tienes que repetir cada nota que te da y la secuencia para subir de puntos.</p>
-            <p>¿Cuántas notas puedes llegar a memorizar? ¿Aceptas el desafío?</p>
+            <p>Tienes que repetir cada nota y la secuencia completa.</p>
+            <p>¿Cuántas notas puedes memorizar? ¡Acepta el desafío!</p>
         </div>
-        <button id="startButton">Empezar</button>
-        <div id="message"></div>
-        <div id="keyboard"></div>
-    <div id="keyboardContainer">
-  <div class="key-group">
-    <div class="key white" data-note="C4">C</div>
-    <div class="key black" data-note="C#4"></div>
-  </div>
-  <div class="key-group">
-    <div class="key white" data-note="D4">D</div>
-    <div class="key black" data-note="D#4"></div>
-  </div>
-  <div class="key-group">
-    <div class="key white" data-note="E4">E</div>
-  </div>
-  <div class="key-group">
-    <div class="key white" data-note="F4">F</div>
-    <div class="key black" data-note="F#4"></div>
-  </div>
-  <div class="key-group">
-    <div class="key white" data-note="G4">G</div>
-    <div class="key black" data-note="G#4"></div>
-  </div>
-  <div class="key-group">
-    <div class="key white" data-note="A4">A</div>
-    <div class="key black" data-note="A#4"></div>
-  </div>
-  <div class="key-group">
-    <div class="key white" data-note="B4">B</div>
-  </div>
-  <div class="key-group">
-    <div class="key white" data-note="C5">C</div>
-    <div class="key black" data-note="C#5"></div>
-  </div>
-  <div class="key-group">
-    <div class="key white" data-note="D5">D</div>
-    <div class="key black" data-note="D#5"></div>
-  </div>
-  <div class="key-group">
-    <div class="key white" data-note="E5">E</div>
-  </div>
-  <div class="key-group">
-    <div class="key white" data-note="F5">F</div>
-    <div class="key black" data-note="F#5"></div>
-  </div>
-  <div class="key-group">
-    <div class="key white" data-note="G5">G</div>
-    <div class="key black" data-note="G#5"></div>
-  </div>
-  <div class="key-group">
-    <div class="key white" data-note="A5">A</div>
-    <div class="key black" data-note="A#5"></div>
-  </div>
-  <div class="key-group">
-    <div class="key white" data-note="B5">B</div>
-  </div>
-  <div class="key-group">
-    <div class="key white" data-note="C6">C</div>
-  </div>
-</div>
 
+        <div class="stats">
+            <div class="stat-item">
+                <div class="stat-label">Nivel</div>
+                <div class="stat-value" id="levelDisplay">0</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-label">Mejor</div>
+                <div class="stat-value" id="bestScore">0</div>
+            </div>
+        </div>
+
+        <button id="startButton">🎮 Empezar</button>
+        <div id="message"></div>
+
+        <div id="keyboardContainer">
+            <!-- Primera Octava Completa (C4 - B4) -->
+            <div class="octave-container">
+                <div class="octave-label">Octava Baja</div>
+                <div class="octave">
+                    <div class="key-group">
+                        <div class="key white" data-note="C4">C</div>
+                        <div class="key black" data-note="C#4"></div>
+                    </div>
+                    <div class="key-group">
+                        <div class="key white" data-note="D4">D</div>
+                        <div class="key black" data-note="D#4"></div>
+                    </div>
+                    <div class="key-group">
+                        <div class="key white" data-note="E4">E</div>
+                    </div>
+                    <div class="key-group">
+                        <div class="key white" data-note="F4">F</div>
+                        <div class="key black" data-note="F#4"></div>
+                    </div>
+                    <div class="key-group">
+                        <div class="key white" data-note="G4">G</div>
+                        <div class="key black" data-note="G#4"></div>
+                    </div>
+                    <div class="key-group">
+                        <div class="key white" data-note="A4">A</div>
+                        <div class="key black" data-note="A#4"></div>
+                    </div>
+                    <div class="key-group">
+                        <div class="key white" data-note="B4">B</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Segunda Octava Completa (C5 - B5) -->
+            <div class="octave-container">
+                <div class="octave-label">Octava Alta</div>
+                <div class="octave">
+                    <div class="key-group">
+                        <div class="key white" data-note="C5">C</div>
+                        <div class="key black" data-note="C#5"></div>
+                    </div>
+                    <div class="key-group">
+                        <div class="key white" data-note="D5">D</div>
+                        <div class="key black" data-note="D#5"></div>
+                    </div>
+                    <div class="key-group">
+                        <div class="key white" data-note="E5">E</div>
+                    </div>
+                    <div class="key-group">
+                        <div class="key white" data-note="F5">F</div>
+                        <div class="key black" data-note="F#5"></div>
+                    </div>
+                    <div class="key-group">
+                        <div class="key white" data-note="G5">G</div>
+                        <div class="key black" data-note="G#5"></div>
+                    </div>
+                    <div class="key-group">
+                        <div class="key white" data-note="A5">A</div>
+                        <div class="key black" data-note="A#5"></div>
+                    </div>
+                    <div class="key-group">
+                        <div class="key white" data-note="B5">B</div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+
     <script src="script.js"></script>
 </body>
 </html>
-
-
